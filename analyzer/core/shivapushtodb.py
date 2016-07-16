@@ -128,7 +128,7 @@ def sendfeed():
     port = server.shivaconf.getint('hpfeeds', 'port')
     ident = server.shivaconf.get('hpfeeds', 'ident')
     secret = server.shivaconf.get('hpfeeds', 'secret')
-    channel = {"parsed": "shiva.parsed", "ip_url": "shiva.ip.url"}
+    channel = {"parsed": "shiva.parsed", "ip_url": "shiva.urls"}
     
     try:
         hpc = hpfeeds.new(host, port, ident, secret)
