@@ -18,6 +18,7 @@ host = shivaconf.get('hpfeeds', 'host')
 port = shivaconf.getint('hpfeeds', 'port')
 ident = shivaconf.get('hpfeeds', 'ident')
 secret = shivaconf.get('hpfeeds', 'secret')
+sendraw = shivaconf.get('hpfeeds', 'sendraw')
 
 path = {'raw_spam' : shivaconf.get('analyzer', 'rawspampath'), 
         'attach' : shivaconf.get('analyzer', 'attachpath'),
@@ -42,9 +43,10 @@ def send_raw():
             
             d = {'s_id': spam_id, 'spamfile': spamfile, 'ip': ip, 'name': f}
             data = json.dumps(d)
-            with lock:
-                hpc.publish(channels['raw_spam'], data)
-                print "Raw Published"
+            if sendraw is True:
+                with lock:
+                    hpc.publish(channels['raw_spam'], data)
+                    print "Raw Published"
             
             shutil.move(path['raw_spam']+f, path['hpfeedspam'])
     else:
