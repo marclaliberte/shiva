@@ -128,6 +128,10 @@ def sendfeed():
     port = server.shivaconf.getint('hpfeeds', 'port')
     ident = server.shivaconf.get('hpfeeds', 'ident')
     secret = server.shivaconf.get('hpfeeds', 'secret')
+<<<<<<< HEAD
+=======
+    sendparsed = server.shivaconf.get('hpfeeds', 'sendparsed')
+>>>>>>> development
     channel = {"parsed": "shiva.parsed", "ip_url": "shiva.urls"}
     
     try:
@@ -136,12 +140,13 @@ def sendfeed():
         logging.critical("Cannot connect. %s" % e)
         
     for record in server.QueueReceiver.deep_records:
-        try:
-            data = cPickle.dumps(record)
-            hpc.publish(channel["parsed"], data)
-            logging.info("Record sent.")
-        except Exception, e:
-            logging.critical("[-] Error (shivapushtodb parsed) in publishing to hpfeeds. %s" % e)   
+        if sendparsed is True:
+            try:
+                data = cPickle.dumps(record)
+                hpc.publish(channel["parsed"], data)
+                logging.info("Record sent.")
+            except Exception, e:
+                logging.critical("[-] Error (shivapushtodb parsed) in publishing to hpfeeds. %s" % e)   
     
         if len(record['links']) > 0:
             for link in record['links']:
