@@ -128,10 +128,7 @@ def sendfeed():
     port = server.shivaconf.getint('hpfeeds', 'port')
     ident = server.shivaconf.get('hpfeeds', 'ident')
     secret = server.shivaconf.get('hpfeeds', 'secret')
-<<<<<<< HEAD
-=======
     sendparsed = server.shivaconf.get('hpfeeds', 'sendparsed')
->>>>>>> development
     channel = {"parsed": "shiva.parsed", "ip_url": "shiva.urls"}
     
     try:
