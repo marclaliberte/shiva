@@ -14,8 +14,6 @@ restart_receiver () {
     #cd ..
 
     echo -e "\n\t[+] scheduler script stopped SHIVA-receiver"
-    echo -en "\t[+] number of established connection before stopping receiver: "
-    netstat -natp | grep -i estab | wc -l
     echo -e "\t[+] attempting to restart receiver....."
     
     lamson start -FORCE
